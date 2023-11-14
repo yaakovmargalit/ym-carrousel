@@ -3,20 +3,6 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-/**
- * Register the widget preview script
- */
-// function your_widget_register_preview_script() {
-//     wp_enqueue_script(
-//         'your-widget-preview-script', // Script handle
-//         plugin_dir_url( __FILE__ ) . '/js/swiper.js', // Script source
-//         // array( 'jquery', 'elementor-editor' ), // Dependencies
-//         false, // Version number
-//         true // Load script in footer
-//     );
-// }
-
-// add_action( 'elementor/editor/after_enqueue_scripts', 'your_widget_register_preview_script' );
 
 
 class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
@@ -99,7 +85,8 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __('פועל', 'ym-carrousel'),
                 'label_off' => __('כבוי', 'ym-carrousel'),
-                'default' => 'no'
+                'return_value' => 'yes',
+                'default' => 'off'
             ]
         );
         $this->add_control(
@@ -218,11 +205,10 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        echo '<div class="swiper-container mySwiper" data-isAutoplay="'. esc_html($settings['is_autoplay']).'" data-delay="'. esc_html($settings['delay']).'" data-effect="'. esc_html($settings['effect']).'"><div class="swiper-wrapper">';
+        echo '<div class="swiper-container mySwiper" data-isAutoplay="'. esc_html($settings['is_autoplay']??0).'" data-delay="'. esc_html($settings['delay']).'" data-effect="'. esc_html($settings['effect']).'"><div class="swiper-wrapper">';
 
         foreach ($settings['cards'] as $card) {
             echo '<div class="swiper-slide" style="background-image: url(' . esc_url($card['image']['url']) . ');background-size: cover;background-position: center;flex-direction: column;">';
-            // echo '<div class="elementor-custom-image"><img src="'. .'" /></div>';
             echo '<h2 class="card-title" style="color:' . esc_html($card['title_color']) . ';    text-align: center;">' . esc_html($card['title']) . '</h2>';
             echo '</div>';
         }

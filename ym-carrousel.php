@@ -2,10 +2,6 @@
 /**
  * Plugin Name: קרוסלה יפה לאלמנטור
  * Description: משהו ממש יפה.
- * Plugin URI:  https://elementor.com/
- * Version:     1.0.0
- * Author:      Elementor Developer
- * Author URI:  https://developers.elementor.com/
  * Text Domain: ym-carrousel
  * 
  * Elementor tested up to: 3.16.0

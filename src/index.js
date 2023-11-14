@@ -1,5 +1,5 @@
 import Swiper from 'swiper';
-import { EffectCards, Autoplay ,EffectCube,EffectCreative} from 'swiper/modules'
+import { EffectCards, Autoplay, EffectCube, EffectCreative } from 'swiper/modules'
 
 
 class ContentToggleButton extends elementorModules.frontend.handlers.Base {
@@ -23,17 +23,27 @@ class ContentToggleButton extends elementorModules.frontend.handlers.Base {
     // this.elements.$swiper.on('DOMSubtreeModified',this.onSwiperLoad.bind(this));
   }
 
-  onSwiperLoad(event) {
-    const isAutoplay = this.elements.$swiper.data("isautoplay")
+  onSwiperLoad() {
+    let isAutoplay = this.elements.$swiper.data("isautoplay") || false
     const delay = +this.elements.$swiper.data("delay")
     const effect = this.elements.$swiper.data("effect")
-    console.log(effect);
-    if(effect==='creative'){
+    console.log(isAutoplay);
+    let autoplay;
+    if (isAutoplay==='yes') {
+      autoplay = {
+        delay: delay * 1000
+      }
+    } else {
+      autoplay = false
+    }
+    console.log(autoplay);
+
+    if (effect === 'creative') {
       this.elements.$swiper.css('overflow', 'hidden');
     }
     var swiper = new Swiper(".mySwiper", {
       effect: effect,
-      modules: [EffectCards, Autoplay,EffectCube,EffectCreative],
+      modules: [EffectCards, Autoplay, EffectCube, EffectCreative],
       grabCursor: true,
 
       creativeEffect: {
@@ -48,9 +58,7 @@ class ContentToggleButton extends elementorModules.frontend.handlers.Base {
           rotate: [0, 0, 90],
         },
       },
-      autoplay: isAutoplay.length?{
-        delay:delay*1000
-      }:false
+      autoplay:autoplay
     });
   }
 }
