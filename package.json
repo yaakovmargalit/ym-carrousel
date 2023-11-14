@@ -1,0 +1,16 @@
+{
+  "name": "add-gallery",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@wordpress/scripts": "^26.16.0",
+    "swiper": "^11.0.4"
+  }
+}
