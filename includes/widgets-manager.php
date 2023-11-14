@@ -15,7 +15,7 @@ add_action( 'elementor/widgets/register', 'register_ym_carrousel_custom_widgets'
 function ym_carrousel_widgets_dependencies() {
 
 	/* Scripts */
-	wp_register_script( 'ym_carrousel-script-1', plugins_url( '/js/swiper.js', __FILE__ ), array( ), '2.0.0', false );
+	wp_register_script( 'ym_carrousel-script-1', plugins_url( '/js/index.js', __FILE__ ), array( 'elementor-frontend'), '2.0.0', true );
 
 
 	/* Styles */

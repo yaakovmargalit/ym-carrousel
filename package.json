@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "wp-scripts build src/index.js"
+    "build": "wp-scripts build src/index.js --output-path=includes/js",
+    "start": "wp-scripts start --output-path=includes/js"
   },
   "keywords": [],
   "author": "",

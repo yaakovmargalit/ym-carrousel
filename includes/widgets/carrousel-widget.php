@@ -36,7 +36,7 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
 
     public function get_name()
     {
-        return 'carrousel';
+        return 'ym_carrousel';
     }
 
     public function get_title()
@@ -79,13 +79,38 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+			'effect',
+			[
+				'label' => esc_html__( 'סגנון מעבר', 'ym-carrousel' ),
+				'type' => \Elementor\Controls_Manager::SELECT,
+				'default' => 'cards',
+				'options' => [
+					'cards' => esc_html__( 'כרטיס', 'ym-carrousel' ),
+					'cube' => esc_html__( 'קוביה', 'ym-carrousel' ),
+					'creative'  => esc_html__( 'סיבוב', 'ym-carrousel' )
+				]
+			]
+		);
+
+        $this->add_control(
             'is_autoplay',
             [
                 'label' => __('ניגון אוטומטי', 'ym-carrousel'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
                 'label_on' => __('פועל', 'ym-carrousel'),
                 'label_off' => __('כבוי', 'ym-carrousel'),
-                'default' => 'מם'
+                'default' => 'no'
+            ]
+        );
+        $this->add_control(
+            'delay',
+            [
+                'label' => __('זמן השהיה (בשניות)', 'ym-carrousel'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+				'min' => 1,
+				'max' => 100,
+				'step' => 1,
+				'default' => 2,
             ]
         );
 
@@ -193,7 +218,7 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
     {
         $settings = $this->get_settings_for_display();
 
-        echo '<div class="swiper-container mySwiper"><div class="swiper-wrapper">';
+        echo '<div class="swiper-container mySwiper" data-isAutoplay="'. esc_html($settings['is_autoplay']).'" data-delay="'. esc_html($settings['delay']).'" data-effect="'. esc_html($settings['effect']).'"><div class="swiper-wrapper">';
 
         foreach ($settings['cards'] as $card) {
             echo '<div class="swiper-slide" style="background-image: url(' . esc_url($card['image']['url']) . ');background-size: cover;background-position: center;flex-direction: column;">';
@@ -208,7 +233,7 @@ class Ym_Elementor_Carrousel_Widget extends \Elementor\Widget_Base
     {
         ?>
         <# view.addInlineEditingAttributes('cards', 'repeater' ); #>
-            <div class="swiper-container mySwiper">
+            <div class="swiper-container mySwiper" data-isAutoplay="{{settings.is_autoplay}}" data-delay="{{settings.delay}}" data-effect="{{settings.effect}}">
                 <div class="swiper-wrapper">
 
                     <# _.each(settings.cards, function(card) { #>
